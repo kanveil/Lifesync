@@ -1,0 +1,49 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <p class="ls-eyebrow">Study & schedule</p>
+    <h1 class="ls-display page-title">Planner</h1>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="ls-section-title">
+    <h2>Today's study blocks</h2>
+  </div>
+
+  <div class="ls-card no-pad">
+    @for (block of data.studyBlocks(); track block.id) {
+      <div class="ls-row accent-sky">
+        <div class="row-body">
+          <p class="row-title">{{ block.course }}</p>
+          <p class="row-time">{{ block.time }} · {{ block.durationMin }} min</p>
+        </div>
+        <span class="priority-pill" [class]="block.priority">{{ block.priority }}</span>
+      </div>
+    }
+  </div>
+
+  <div class="ls-section-title">
+    <h2>Priority matrix</h2>
+  </div>
+
+  <div class="matrix">
+    <div class="matrix-col urgent">
+      <p class="matrix-label">Do now</p>
+      @for (b of byPriority('urgent'); track b.id) {
+        <div class="matrix-card">{{ b.course }}</div>
+      }
+    </div>
+    <div class="matrix-col soon">
+      <p class="matrix-label">Do soon</p>
+      @for (b of byPriority('soon'); track b.id) {
+        <div class="matrix-card">{{ b.course }}</div>
+      }
+    </div>
+    <div class="matrix-col later">
+      <p class="matrix-label">Later</p>
+      @for (b of byPriority('later'); track b.id) {
+        <div class="matrix-card">{{ b.course }}</div>
+      }
+    </div>
+  </div>
+</ion-content>

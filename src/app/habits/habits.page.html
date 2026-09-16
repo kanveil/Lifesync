@@ -1,0 +1,28 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <p class="ls-eyebrow">Streaks & goals</p>
+    <h1 class="ls-display page-title">Habits</h1>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  @for (habit of data.habits(); track habit.id) {
+    <div class="habit-card ls-card">
+      <div class="habit-head">
+        <div>
+          <p class="habit-name">{{ habit.name }}</p>
+          <p class="habit-streak">{{ habit.streakDays }}-day streak</p>
+        </div>
+        <ion-button size="small" fill="outline" (click)="log(habit.id)">
+          Log {{ habit.unit === 'glasses' ? '1 glass' : habit.unit === 'min' ? '+5 min' : 'done' }}
+        </ion-button>
+      </div>
+      <div class="habit-bar">
+        <div class="habit-bar-fill" [style.width.%]="pct(habit.progress, habit.target)"></div>
+      </div>
+      <p class="habit-progress-label">
+        {{ habit.progress }} / {{ habit.target }} {{ habit.unit }} today
+      </p>
+    </div>
+  }
+</ion-content>

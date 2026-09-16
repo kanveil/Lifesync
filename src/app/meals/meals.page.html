@@ -1,0 +1,48 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <p class="ls-eyebrow">Eat well, spend less</p>
+    <h1 class="ls-display page-title">Meals</h1>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="ls-section-title">
+    <h2>This week</h2>
+  </div>
+
+  <div class="meal-grid ls-card no-pad">
+    <div class="grid-row grid-head">
+      <span></span>
+      @for (day of days; track day) {
+        <span>{{ day }}</span>
+      }
+    </div>
+    @for (meal of mealTimes; track meal) {
+      <div class="grid-row">
+        <span class="grid-label">{{ meal }}</span>
+        @for (day of days; track day) {
+          <span class="grid-cell" [class.filled]="mealFor(day, meal)">
+            {{ mealFor(day, meal) || '—' }}
+          </span>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="ls-section-title">
+    <h2>Grocery checklist</h2>
+    <span class="ls-eyebrow">auto-built from your meals</span>
+  </div>
+
+  <div class="ls-card no-pad">
+    @for (item of data.groceries(); track item.id) {
+      <div class="ls-row accent-moss">
+        <p class="row-title" [class.done]="item.checked">{{ item.name }}</p>
+        <ion-checkbox
+          [checked]="item.checked"
+          (ionChange)="toggle(item.id)"
+        ></ion-checkbox>
+      </div>
+    }
+  </div>
+</ion-content>

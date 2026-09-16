@@ -1,0 +1,67 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <div class="dash-title">
+      <p class="ls-eyebrow">Today</p>
+      <h1 class="ls-display">Hi, {{ data.userName() }}</h1>
+    </div>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/insights" fill="clear">
+        <ion-icon name="stats-chart-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="progress-card ls-card">
+    <div class="progress-ring" [style.--pct.%]="data.routineProgress()">
+      <span>{{ data.routineProgress() }}%</span>
+    </div>
+    <div class="progress-copy">
+      <h3>Routine on track</h3>
+      <p>
+        {{ data.routine().length }} items today — keep the streak going with
+        your medication reminder first.
+      </p>
+    </div>
+  </div>
+
+  <div class="ls-section-title">
+    <h2>Daily routine & checklist</h2>
+  </div>
+
+  <div class="ls-card no-pad">
+    @for (item of data.routine(); track item.id) {
+      <div class="ls-row" [class]="accentFor(item.category)">
+        <ion-icon [name]="iconFor(item.category)" class="row-icon"></ion-icon>
+        <div class="row-body">
+          <p class="row-title" [class.done]="item.done">{{ item.title }}</p>
+          <p class="row-time">
+            {{ item.time }}
+            @if (item.requiresConfirmation) {
+              <span class="row-tag">confirm to log</span>
+            }
+          </p>
+        </div>
+        <ion-checkbox
+          [checked]="item.done"
+          (ionChange)="toggle(item.id)"
+        ></ion-checkbox>
+      </div>
+    }
+  </div>
+
+  <div class="ls-section-title">
+    <h2>Habit streaks</h2>
+    <a routerLink="/tabs/habits">See all</a>
+  </div>
+
+  <div class="streak-row">
+    @for (habit of data.habits(); track habit.id) {
+      <div class="streak-chip ls-card">
+        <p class="streak-days">{{ habit.streakDays }}<span>d</span></p>
+        <p class="streak-name">{{ habit.name }}</p>
+      </div>
+    }
+  </div>
+</ion-content>

@@ -1,0 +1,63 @@
+@import '@fontsource/space-grotesk/500.css';
+@import '@fontsource/space-grotesk/600.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+
+h1, h2, h3, .ls-display {
+  font-family: var(--ls-font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ls-ink);
+}
+
+ion-content {
+  --background: var(--ls-paper);
+}
+
+ion-toolbar {
+  --background: var(--ls-paper);
+  --color: var(--ls-ink);
+}
+
+// Flat, bordered surfaces instead of the default soft drop-shadow card.
+.ls-card {
+  background: var(--ls-surface);
+  border: 1px solid var(--ls-line);
+  border-radius: var(--ls-radius-md);
+  padding: 16px;
+}
+
+// A left color-bar row used across modules to encode category at a glance
+// (study = sky, habit = moss, budget = clay/alert) instead of a badge or icon soup.
+.ls-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 4px 12px 14px;
+  border-left: 3px solid var(--ls-line);
+  border-bottom: 1px solid var(--ls-line);
+
+  &:last-child { border-bottom: none; }
+
+  &.accent-sky { border-left-color: var(--ls-sky); }
+  &.accent-moss { border-left-color: var(--ls-moss); }
+  &.accent-clay { border-left-color: var(--ls-clay); }
+  &.accent-alert { border-left-color: var(--ls-alert); }
+}
+
+.ls-eyebrow {
+  font-size: 13px;
+  color: var(--ls-ink-60);
+  margin: 0 0 2px;
+}
+
+.ls-section-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 28px 0 10px;
+
+  h2 { font-size: 19px; margin: 0; }
+  a, ion-button { font-size: 13px; }
+}

@@ -1,0 +1,48 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button fill="clear" (click)="back()">
+        <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <p class="ls-eyebrow">Across all modules</p>
+    <h1 class="ls-display page-title">Insights</h1>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="stat-grid">
+    <div class="ls-card stat">
+      <p class="stat-value">{{ data.routineProgress() }}%</p>
+      <p class="stat-label">Routine completed today</p>
+    </div>
+    <div class="ls-card stat">
+      <p class="stat-value">${{ data.totalSpent() }}</p>
+      <p class="stat-label">Spent this month</p>
+    </div>
+    <div class="ls-card stat">
+      <p class="stat-value">{{ data.habits()[0].streakDays }}d</p>
+      <p class="stat-label">Longest active streak</p>
+    </div>
+  </div>
+
+  <div class="ls-section-title">
+    <h2>What this week is telling you</h2>
+  </div>
+
+  <div class="ls-card insight-note">
+    <p>
+      Study time and grocery runs are clustering on the same evenings —
+      moving one earlier could free up a clearer study block before your
+      Bio 201 midterm.
+    </p>
+  </div>
+
+  <div class="ls-card insight-note">
+    <p>
+      Transport spending is close to its monthly limit while food still has
+      headroom — shifting a few campus-cafe visits to home-cooked meals
+      would help balance both.
+    </p>
+  </div>
+</ion-content>

@@ -1,0 +1,52 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <p class="ls-eyebrow">This month</p>
+    <h1 class="ls-display page-title">Budget</h1>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="ls-card total-card">
+    <p class="total-label">Spent this month</p>
+    <p class="total-amount">${{ data.totalSpent() }} <span>/ ${{ data.totalLimit() }}</span></p>
+  </div>
+
+  <div class="ls-section-title">
+    <h2>Categories</h2>
+  </div>
+
+  @for (cat of data.budgetCategories(); track cat.id) {
+    <div class="ls-card cat-card" [class.over]="isOverThreshold(cat.spent, cat.limit)">
+      <div class="cat-head">
+        <p class="cat-name">{{ cat.name }}</p>
+        <p class="cat-amount">${{ cat.spent }} / ${{ cat.limit }}</p>
+      </div>
+      <div class="cat-bar">
+        <div
+          class="cat-bar-fill"
+          [class.over]="isOverThreshold(cat.spent, cat.limit)"
+          [style.width.%]="pct(cat.spent, cat.limit)"
+        ></div>
+      </div>
+      @if (isOverThreshold(cat.spent, cat.limit)) {
+        <p class="cat-warning">Nearing your {{ cat.name.toLowerCase() }} limit</p>
+      }
+    </div>
+  }
+
+  <div class="ls-section-title">
+    <h2>Recent expenses</h2>
+  </div>
+
+  <div class="ls-card no-pad">
+    @for (e of data.expenses(); track e.id) {
+      <div class="ls-row accent-clay">
+        <div class="row-body">
+          <p class="row-title">{{ e.label }}</p>
+          <p class="row-time">{{ e.category }} · {{ e.date }}</p>
+        </div>
+        <p class="row-amount">${{ e.amount.toFixed(2) }}</p>
+      </div>
+    }
+  </div>
+</ion-content>
